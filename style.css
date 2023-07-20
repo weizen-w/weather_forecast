@@ -1,5 +1,5 @@
 .div-style{
-  background-image: url("/image/fon-bg.jpeg");
+  background-image: url("./image/fon-bg.jpeg");
   margin: 30px;
   position: relative;
   justify-content: center;

@@ -6,12 +6,12 @@ function addHTMLelements(objectIP, objectWeather) {
   const { temperature, windspeed, winddirection, time, weathercode } = current_weather;
 
   const imgElement = document.createElement("img");
-  imgElement.src = "/image/5538410.png";
+  imgElement.src = "./image/5538410.png";
   imgElement.className = "img-style";
   const countryElement = document.createElement("p");
   countryElement.textContent = `${country}, ${city}`;
   const iconTempElement = document.createElement("img");
-  iconTempElement.src = "/image/icon-temp.png";
+  iconTempElement.src = "./image/icon-temp.png";
   iconTempElement.style.height = "30px"
   const temperatureElement = document.createElement("p");
   temperatureElement.textContent = temperature;
