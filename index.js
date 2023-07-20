@@ -1,7 +1,7 @@
 const divElement = document.getElementById("div");
 
 function addHTMLelements(objectIP, objectWeather) {
-  const { country, region, city, longitude, latitude } = objectIP;
+  const { country, region, city } = objectIP;
   const { current_weather } = objectWeather;
   const { temperature, windspeed, winddirection, time, weathercode } = current_weather;
 
@@ -12,10 +12,32 @@ function addHTMLelements(objectIP, objectWeather) {
   countryElement.textContent = `${country}, ${city}`;
   const iconTempElement = document.createElement("img");
   iconTempElement.src = "./image/icon-temp.png";
-  iconTempElement.style.height = "30px"
-  const temperatureElement = document.createElement("p");
-  temperatureElement.textContent = temperature;
-  temperatureElement.append(iconTempElement);
+  iconTempElement.style.height = "20px"
+  const iconWindsElement = document.createElement("img");
+  iconWindsElement.src = "./image/winds.png";
+  iconWindsElement.style.height = "20px"
+  const iconAtmosElement = document.createElement("img");
+  iconAtmosElement.src = "./image/atmos.png";
+  iconAtmosElement.style.height = "20px"
+  const regionElement = document.createElement("p");
+  regionElement.textContent = region;
+  regionElement.style.fontSize = "20px";
+
+  const tempElement = document.createElement("span");
+  tempElement.textContent = temperature;
+  tempElement.append(iconTempElement);
+  tempElement.style.margin = "10px"
+  const windsElement = document.createElement("span");
+  windsElement.textContent = windspeed;
+  windsElement.append(iconWindsElement);
+  windsElement.style.margin = "10px"
+  const atmosElement = document.createElement("span");
+  atmosElement.textContent = winddirection;
+  atmosElement.append(iconAtmosElement);
+  atmosElement.style.margin = "10px"
+
+  const infoElement = document.createElement("p");
+  infoElement.append(tempElement, windsElement, atmosElement);
   const codeElement = document.createElement("p");
   codeElement.textContent = getWeatherCodeString(weathercode);
   codeElement.style.fontSize = "15px";
@@ -25,7 +47,8 @@ function addHTMLelements(objectIP, objectWeather) {
   rightColumn.style.width = "290px";
   rightColumn.append(
     countryElement,
-    temperatureElement,
+    regionElement,
+    infoElement,
     codeElement
   );
   const rowElement = document.createElement("tr");
