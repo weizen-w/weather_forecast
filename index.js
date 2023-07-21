@@ -1,54 +1,89 @@
 const divElement = document.getElementById("div");
 
+function getBGImageFromTime(time) {
+  const hour = time.substring(11, 13);
+  if (hour >= 8 && hour < 20) return "./image/bg-day.jpg";
+  if (hour >= 20 || hour < 8) {
+    divElement.style.color = "white";
+    return "./image/bg-night.jpg";
+  }
+}
+
+function getImageWindDirection(winddirection) {
+  if (winddirection < 22.5 || winddirection > 337.5) return "North";
+  if (winddirection < 67.5 && winddirection > 22.5) return "North-east";
+  if (winddirection < 112.5 && winddirection > 67.5) return "East";
+  if (winddirection < 157.5 && winddirection > 112.5) return "South-east";
+  if (winddirection < 202.5 && winddirection > 157.5) return "South";
+  if (winddirection < 247.5 && winddirection > 202.5) return "South-west";
+  if (winddirection < 292.5 && winddirection > 247.5) return "West";
+  if (winddirection < 337.5 && winddirection > 292.5) return "North-west";
+}
+
 function addHTMLelements(objectIP, objectWeather) {
   const { country, region, city } = objectIP;
   const { current_weather } = objectWeather;
   const { temperature, windspeed, winddirection, time, weathercode } =
     current_weather;
-
+  divElement.style.backgroundImage = `url(${getBGImageFromTime(time)})`;
+  divElement.style.backgroundSize = "100%"
   const imgElement = document.createElement("img");
   imgElement.src = getICONFromWeatherCode(weathercode);
-  console.log(getICONFromWeatherCode(weathercode));
   imgElement.className = "img-style";
   const countryElement = document.createElement("p");
   countryElement.textContent = `${country}, ${city}`;
+  countryElement.style.fontWeight = "bold";
+  countryElement.style.marginBottom = 0;
   const iconTempElement = document.createElement("img");
   iconTempElement.src = "./image/icon-temp.png";
   iconTempElement.style.height = "20px";
   const iconWindsElement = document.createElement("img");
   iconWindsElement.src = "./image/winds.png";
   iconWindsElement.style.height = "20px";
-  const iconAtmosElement = document.createElement("img");
-  iconAtmosElement.src = "./image/atmos.png";
-  iconAtmosElement.style.height = "20px";
+  iconWindsElement.style.marginLeft = "3px";
+  const iconWindDirectionElement = document.createElement("img");
+  iconWindDirectionElement.src = "./image/down.png";
+  iconWindDirectionElement.style.transform = `rotate(${winddirection}deg)`;
+  iconWindDirectionElement.style.height = "20px";
+  iconWindDirectionElement.style.marginLeft = "3px";
   const regionElement = document.createElement("p");
   regionElement.textContent = region;
   regionElement.style.fontSize = "20px";
+  regionElement.style.margin = "0 0 20px 0";
 
   const tempElement = document.createElement("span");
-  tempElement.textContent = temperature;
+  tempElement.textContent = `${temperature}°C`;
   tempElement.append(iconTempElement);
-  tempElement.style.margin = "10px";
   const windsElement = document.createElement("span");
-  windsElement.textContent = windspeed;
+  windsElement.textContent = `${windspeed} km/h`;
   windsElement.append(iconWindsElement);
-  windsElement.style.margin = "10px";
-  const atmosElement = document.createElement("span");
-  atmosElement.textContent = winddirection;
-  atmosElement.append(iconAtmosElement);
-  atmosElement.style.margin = "10px";
+  windsElement.style.margin = "5px";
+  const winDirectionElement = document.createElement("span");
+  winDirectionElement.textContent = getImageWindDirection(winddirection);
+  winDirectionElement.append(iconWindDirectionElement);
+  winDirectionElement.style.margin = "5px";
 
-  const infoElement = document.createElement("p");
-  infoElement.append(tempElement, windsElement, atmosElement);
+  const infoWindElement = document.createElement("p");
+  infoWindElement.append(windsElement, winDirectionElement);
+  infoWindElement.style.fontSize = "20px";
+  infoWindElement.style.margin = "5px";
+  infoWindElement.style.borderTop = "1px solid";
+  infoWindElement.style.padding = "3px";
   const codeElement = document.createElement("p");
   codeElement.textContent = getWeatherCodeString(weathercode);
   codeElement.style.fontSize = "15px";
+  codeElement.style.margin = "3px";
 
   const leftColumn = document.createElement("td");
-  leftColumn.append(imgElement);
+  leftColumn.append(imgElement, codeElement);
   const rightColumn = document.createElement("td");
-  rightColumn.style.width = "290px";
-  rightColumn.append(countryElement, regionElement, infoElement, codeElement);
+  rightColumn.style.maxWidth = "350px";
+  rightColumn.append(
+    countryElement,
+    regionElement,
+    tempElement,
+    infoWindElement
+  );
   const rowElement = document.createElement("tr");
   rowElement.append(leftColumn, rightColumn);
   const tableElement = document.createElement("table");
@@ -124,59 +159,59 @@ function getICONFromWeatherCode(code) {
   switch (code) {
     case 0:
       return "./image/codeWeather/113.png";
-    case (1):
+    case 1:
       return "./image/codeWeather/116.png";
-    case (2):
+    case 2:
       return "./image/codeWeather/116.png";
-    case (3):
+    case 3:
       return "./image/codeWeather/116.png";
-    case (45):
+    case 45:
       return "./image/codeWeather/143.png";
-    case (48):
+    case 48:
       return "./image/codeWeather/143.png";
-    case (51):
+    case 51:
       return "./image/codeWeather/185.png";
-    case (53):
+    case 53:
       return "./image/codeWeather/185.png";
-    case (55):
+    case 55:
       return "./image/codeWeather/185.png";
-    case (56):
+    case 56:
       return "./image/codeWeather/182.png";
-    case (57):
+    case 57:
       return "./image/codeWeather/182.png";
-    case (61):
+    case 61:
       return "./image/codeWeather/308.png";
-    case (63):
+    case 63:
       return "./image/codeWeather/308.png";
-    case (65):
+    case 65:
       return "./image/codeWeather/308.png";
-    case (66):
+    case 66:
       return "./image/codeWeather/230.png";
-    case (67):
+    case 67:
       return "./image/codeWeather/230.png";
-    case (71):
+    case 71:
       return "./image/codeWeather/338.png";
-    case (73):
+    case 73:
       return "./image/codeWeather/338.png";
-    case (75):
+    case 75:
       return "./image/codeWeather/338.png";
-    case (77):
-      return "./image/codeWeather/350.png";
-    case (80):
+    case 77:
+      return "./image/codeWeather/338.png";
+    case 80:
       return "./image/codeWeather/359.png";
-    case (81):
+    case 81:
       return "./image/codeWeather/359.png";
-    case (82):
+    case 82:
       return "./image/codeWeather/359.png";
-    case (85):
+    case 85:
       return "./image/codeWeather/371.png";
-    case (86):
+    case 86:
       return "./image/codeWeather/371.png";
-    case (95):
+    case 95:
       return "./image/codeWeather/386.png";
-    case (96):
+    case 96:
       return "./image/codeWeather/392.png";
-    case (99):
+    case 99:
       return "./image/codeWeather/392.png";
     default:
       return "Wrong code";

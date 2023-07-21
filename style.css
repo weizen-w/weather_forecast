@@ -1,19 +1,21 @@
 .div-style{
-  background-image: url("./image/fon-bg.jpeg");
   margin: 10px;
   position: relative;
   justify-content: center;
   display: flex;
-  width: 500px;
-  height: 250px;
+  max-width: 550px;
+  max-height: 250px;
   border-radius: 30px;
-  box-shadow: 0 0 3px black;
+  box-shadow: 0 0 15px black;
+  border: 1px solid;
 }
 
 .img-style {
-  height: 140px;
-  border: 2px solid rgb(255, 255, 255);
-  box-shadow: 0 0 20px rgb(99, 99, 99);
+  margin: 5px;
+  background-color: white;
+  max-height: 120px;
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 0 0 10px rgb(50, 50, 50);
   border-radius: 90px;
 }
 
@@ -22,7 +24,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  width: 480px;
+  max-width: 480px;
   font-size: 25px;
   text-shadow: 0 0 1px rgb(0, 0, 0);
 }
