@@ -32,3 +32,74 @@
   0 0 5px #000000,
   0 0 5px #000000;
 }
+
+.new {
+  background: rgb(8,172,224);
+  background: linear-gradient(160deg, rgba(8,172,224,1) 0%, rgba(255,255,255,1) 51%, rgba(87,195,191,1) 100%);
+  min-height: 185px;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.4;
+}
+
+.new:hover {
+  opacity: 1;
+}
+
+.newDivImage {
+  height: 30px;
+}
+
+/* Всплывающая форма-скрыта по умолчанию */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 160px;
+  left: 83px;
+  z-index: 9;
+  border-radius: 30px;
+}
+
+/* Добавить стили для контейнера формы */
+.form-container {
+  padding: 40px;
+  border: 1px solid white;
+  background: rgb(8,172,224);
+  background: linear-gradient(160deg, rgba(8,172,224,1) 0%, rgba(255,255,255,1) 51%, rgba(87,195,191,1) 100%);
+}
+
+/* Поля ввода полной ширины */
+.form-container input[type=text] {
+  border: none;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  background: #ededed;
+}
+
+/* Когда входы получают фокус, сделайте что-нибудь */
+.form-container input[type=text]:focus {
+  background-color: #ffffff;
+  outline: none;
+}
+
+/* Установите стиль для кнопки отправить/войти */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-bottom:10px;
+  opacity: 0.6;
+}
+
+/* Добавить красный цвет фона для кнопки "Отмена" */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Добавить некоторые эффекты наведения на кнопки */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}

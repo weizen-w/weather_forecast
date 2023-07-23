@@ -9,5 +9,17 @@
 </head>
 <body>
   <div id="div-weather-IP" class="div-style"></div>
+
+
+  <div id="div-weather-new" class="div-style new" onclick="openForm()">
+    <img class="newDivImage" src="./image/new.png" alt="new">
+  </div>
+  <div class="form-popup form-container" id="myForm">
+    <input type="text" placeholder="Enter city" name="city" required>
+
+    <button type="submit" class="btn">Add</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </div>
+
 </body>
 </html>

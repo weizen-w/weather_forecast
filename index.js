@@ -1,4 +1,6 @@
 const divElement = document.getElementById("div-weather-IP");
+const newDivElement = document.getElementById("div-weather-new");
+const myFormElement = document.getElementById("myForm");
 // paths to icons
 const iconPathBackgroundDay = "./image/bg-day.jpg";
 const iconPathBackgroundNight = "./image/bg-night.jpg";
@@ -21,6 +23,16 @@ const iconPathThunderstormHail = "./image/codeWeather/thunderstormHail.png";
 
 getIPandWeather();
 
+function openForm() {
+  myFormElement.style.display = "block";
+}
+
+function closeForm() {
+  console.log("Работает");
+  myFormElement.style.display = "none";
+  console.log("тоже ");
+}
+
 /**The method makes a request to the current location API and uses it to query the current weather API.
  * Uses the received data to pass to the method addHTMLelements().
  */
@@ -28,9 +40,10 @@ async function getIPandWeather() {
   const resGeo = await fetch("https://get.geojs.io/v1/ip/geo.json");
   const objectGeo = await resGeo.json();
   const { longitude, latitude } = objectGeo;
-
+  
   const resWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
   const objectWeather = await resWeather.json();
+  console.log(objectWeather);
 
   addHTMLelements(objectGeo, objectWeather);
 }
@@ -42,6 +55,8 @@ async function getIPandWeather() {
  */
 function getBGImageFromTime(time) {
   const hour = time.substring(11, 13);
+  console.log(time);
+  console.log(hour);
   if (hour >= 8 && hour < 20) return iconPathBackgroundDay;
   if (hour >= 20 || hour < 8) return iconPathBackgroundNight;
 }
