@@ -7,6 +7,7 @@
 
 <img src="https://github.com/weizen-w/weather_forecast/blob/main/exampleAPP.jpg?raw=true" alt="exampleAPP.jpg">
 
+
 JS course, project. Weather forecast on the site using HTML,CSS,JS,API.
 
 - The application uses JS to access the remote API-geo ([link to API-geo](https://www.geojs.io/docs/v1/endpoints/geo/)) to get the current location, then the application uses the current location to access the remote API-weather ([link to API-weather](https://open-meteo.com/)) to get the current weather forecast. The resulting data is passed to HTML.
