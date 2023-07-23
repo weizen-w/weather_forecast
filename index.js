@@ -42,8 +42,8 @@ async function getIPandWeather() {
  */
 function getBGImageFromTime(time) {
   const hour = time.substring(11, 13);
-  if (hour >= 8 && hour < 20) return iconPathBackgroundDay;
-  if (hour >= 20 || hour < 8) return iconPathBackgroundNight;
+  if (hour >= 6 && hour < 18) return iconPathBackgroundDay;
+  if (hour >= 18 || hour < 6) return iconPathBackgroundNight;
 }
 
 /**The method receives the wind direction(°) and returns a text value of the wind direction.
