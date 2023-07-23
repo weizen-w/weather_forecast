@@ -21,24 +21,24 @@ const iconPathThunderstormHail = "./image/codeWeather/thunderstormHail.png";
 
 getIPandWeather();
 
-/**
- * 
+/**The method makes a request to the current location API and uses it to query the current weather API.
+ * Uses the received data to pass to the method addHTMLelements().
  */
 async function getIPandWeather() {
-  const resIP = await fetch("https://get.geojs.io/v1/ip/geo.json");
-  const objectIP = await resIP.json();
-  const { longitude, latitude } = objectIP;
+  const resGeo = await fetch("https://get.geojs.io/v1/ip/geo.json");
+  const objectGeo = await resGeo.json();
+  const { longitude, latitude } = objectGeo;
 
   const resWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
   const objectWeather = await resWeather.json();
 
-  addHTMLelements(objectIP, objectWeather);
+  addHTMLelements(objectGeo, objectWeather);
 }
 
-/**
+/**The method receives the time and returns (depending on the time of day) a reference to the image for the background.
  * 
- * @param {*} time 
- * @returns 
+ * @param {*} time Times of Day.
+ * @returns link to background image.
  */
 function getBGImageFromTime(time) {
   const hour = time.substring(11, 13);
@@ -46,10 +46,10 @@ function getBGImageFromTime(time) {
   if (hour >= 20 || hour < 8) return iconPathBackgroundNight;
 }
 
-/**
+/**The method receives the wind direction(°) and returns a text value of the wind direction.
  * 
- * @param {*} winddirection 
- * @returns 
+ * @param {*} winddirection wind direction(°).
+ * @returns text value of the wind direction.
  */
 function getImageWindDirection(winddirection) {
   if (winddirection < 22.5 || winddirection > 337.5) return "North";
@@ -62,10 +62,10 @@ function getImageWindDirection(winddirection) {
   if (winddirection < 337.5 && winddirection > 292.5) return "North-west";
 }
 
-/**
+/**The method receives the weather code and returns the weather text value.
  * 
- * @param {*} code 
- * @returns 
+ * @param {*} code the weather code.
+ * @returns the weather text value.
  */
 function getWeatherCodeString(code) {
   switch (code) {
@@ -101,10 +101,10 @@ function getWeatherCodeString(code) {
   }
 }
 
-/**
+/**The method receives the weather code and returns a graphical weather value.
  * 
- * @param {*} code 
- * @returns 
+ * @param {*} code the weather code.
+ * @returns a graphical weather value.
  */
 function getICONFromWeatherCode(code) {
   switch (code) {
@@ -140,9 +140,14 @@ function getICONFromWeatherCode(code) {
   }
 }
 
-
-function addHTMLelements(objectIP, objectWeather) {
-  const { country, region, city } = objectIP;
+/**The method receives an object with data about the current location and
+ * an object with data about the current weather and adds HTML elements to display on the site.
+ * 
+ * @param {*} objectGeo object with data about the current location.
+ * @param {*} objectWeather object with data about the current weather.
+ */
+function addHTMLelements(objectGeo, objectWeather) {
+  const { country, region, city } = objectGeo;
   const { current_weather } = objectWeather;
   const { temperature, windspeed, winddirection, time, weathercode } = current_weather;
 
