@@ -43,7 +43,6 @@ async function getIPandWeather() {
   
   const resWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
   const objectWeather = await resWeather.json();
-  console.log(objectWeather);
 
   addHTMLelements(objectGeo, objectWeather);
 }
@@ -53,10 +52,9 @@ async function getIPandWeather() {
  * @param {*} time Times of Day.
  * @returns link to background image.
  */
-function getBGImageFromTime(time) {
-  const hour = time.substring(11, 13);
-  console.log(time);
-  console.log(hour);
+function getBGImageFromTime() {
+  const date = new Date().toISOString();
+  const hour = date.substring(11,13);
   if (hour >= 8 && hour < 20) return iconPathBackgroundDay;
   if (hour >= 20 || hour < 8) return iconPathBackgroundNight;
 }
@@ -253,7 +251,7 @@ function addHTMLelements(objectGeo, objectWeather) {
   tableElement.className = "table-style";
   tableElement.append(rowElement);
 
-  divElement.style.backgroundImage = `url(${getBGImageFromTime(time)})`;
+  divElement.style.backgroundImage = `url(${getBGImageFromTime()})`;
   divElement.style.backgroundSize = "100%";
   divElement.append(tableElement);
 }
